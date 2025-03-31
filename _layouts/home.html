@@ -1,0 +1,83 @@
+---
+layout: default
+---
+
+<div class="home-container">
+  <!-- Logo Section -->
+  <div class="logo-container">
+    <img src="{{ site.baseurl }}/img/logo.png" alt="Scripture Sprouts Logo" class="logo">
+  </div>
+
+  <!-- Carousel Section -->
+  <div class="carousel-container">
+    <div class="carousel">
+      <div class="carousel-inner">
+        {% for i in (1..6) %}
+          {% assign image_name = "IMG_677" | append: i | append: ".PNG" %}
+          <div class="carousel-item{% if forloop.first %} active{% endif %}">
+            <img src="{{ site.baseurl }}/img/{{ image_name }}" alt="Scripture Sprouts App Screenshot {{ i }}" class="carousel-image">
+          </div>
+        {% endfor %}
+      </div>
+      <button class="carousel-control carousel-control-prev" id="prev-button">&#10094;</button>
+      <button class="carousel-control carousel-control-next" id="next-button">&#10095;</button>
+    </div>
+  </div>
+
+  <!-- App Description -->
+  <div class="app-description">
+    <h2>Daily scripture study for your children that's fun and engaging</h2>
+    <p>Scripture Sprouts helps families grow closer to God through daily scripture study.</p>
+    <!-- Add app store badges here when available -->
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-links">
+      <a href="{{ site.baseurl }}/privacy-policy">Privacy Policy</a>
+      <span class="footer-separator">|</span>
+      <a href="{{ site.baseurl }}/terms-of-use">Terms of Use</a>
+    </div>
+    <div class="footer-copyright">
+      &copy; {{ site.time | date: '%Y' }} Scripture Sprouts. All rights reserved.
+    </div>
+  </footer>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Carousel functionality
+    const carouselItems = document.querySelectorAll('.carousel-item');
+    const prevButton = document.getElementById('prev-button');
+    const nextButton = document.getElementById('next-button');
+    let currentIndex = 0;
+
+    function showSlide(index) {
+      // Hide all slides
+      carouselItems.forEach(item => {
+        item.classList.remove('active');
+      });
+      
+      // Show the current slide
+      carouselItems[index].classList.add('active');
+    }
+
+    // Previous button click
+    prevButton.addEventListener('click', function() {
+      currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
+      showSlide(currentIndex);
+    });
+
+    // Next button click
+    nextButton.addEventListener('click', function() {
+      currentIndex = (currentIndex + 1) % carouselItems.length;
+      showSlide(currentIndex);
+    });
+
+    // Auto advance slides every 5 seconds
+    setInterval(function() {
+      currentIndex = (currentIndex + 1) % carouselItems.length;
+      showSlide(currentIndex);
+    }, 5000);
+  });
+</script> 
